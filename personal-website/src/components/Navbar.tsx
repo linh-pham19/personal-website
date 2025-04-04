@@ -13,6 +13,9 @@ function Navbar() {
                     <Link to="/aboutme">About Me</Link>
                 </li>
                 <li className='navbar-item'>
+                    <Link to="/travel">Travel</Link>
+                </li>
+                <li className='navbar-item'>
                     <Link to="/contact">Contact me</Link>
                 </li>
             </ul>

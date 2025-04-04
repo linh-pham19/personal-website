@@ -115,3 +115,12 @@ main {
 }
 
 
+.label-wrapper {
+  display: flex; /* Use flexbox for alignment */
+
+  margin-bottom: 1rem; /* Add space below each label-wrapper */
+}
+
+input[type="radio"]{
+  margin: 0 5px 0 0; /* Add space to the right of the radio button */
+}
