@@ -1,6 +1,6 @@
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import './App.css';
-import AboutMePage from './pages/AboutMePage';
+import ProjectsPage from './pages/ProjectsPage';
 import HomePage from './pages/HomePage';
 import ContactMePage from './pages/ContactMePage';
 import Navbar from './components/Navbar';
@@ -17,7 +17,7 @@ function App() {
 
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/aboutme" element={<AboutMePage />} />
+            <Route path="/projects" element={<ProjectsPage />} />
             <Route path="/travel" element={<TravelPage />} />
             <Route path="/contact" element={<ContactMePage />} />
           </Routes>

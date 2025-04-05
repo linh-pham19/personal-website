@@ -3,6 +3,13 @@ html, body {
   margin: 0; /* Remove default margin */
 }
 
+@media screen and (max-width: 650px) {
+  .column {
+    width: 100%;
+    display: block;
+  }
+}
+
 #root {
   display: flex;
   flex-direction: column;
@@ -11,6 +18,14 @@ html, body {
 
 main {
   flex: 1; /* Push the footer to the bottom by taking up remaining space */
+}
+
+h1 {
+  font-size: 8rem; /* Large font size for the main title */
+  font-family: "Henny Penny", cursive;
+  color: red; /* White text color */
+  text-align: center; /* Center the title */
+  margin-top: 2rem; /* Add space above the title */
 }
 
 .navbar {
@@ -123,4 +138,53 @@ main {
 
 input[type="radio"]{
   margin: 0 5px 0 0; /* Add space to the right of the radio button */
+}
+
+.card {
+  background-color: rgb(48, 48, 48);
+  box-shadow: 0 4px 8px 0 rgba();
+  margin: 8px;
+  
+}
+
+.column {
+  float: left;
+  width: 33.3%;
+  margin-bottom: 16px;
+  padding: 0 8px;
+}
+
+.container {
+  margin:auto;
+  padding: 0 16px;
+}
+
+.title {
+  color: grey;
+}
+
+.circular--portrait { 
+  position: relative; 
+  width: 200px; 
+  height: 200px; 
+  overflow: hidden; 
+  border-radius: 50%; 
+  display: flex; /* Center the image */
+  margin: auto; /* Center the circular image */
+}   
+
+.circular--portrait img { 
+    width: 100%; 
+    height: auto; 
+}
+
+.text-box {
+  border: 5px solid #f76707;
+  border-radius: 10px;
+  padding: 10px;
+  inline-size: 1000px;
+  overflow-wrap: break-word;
+  word-wrap: break-word; 
+  margin: auto;
+  text-align: left;
 }

@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import '../App.css'
+import emailjs from 'emailjs-com';
 
 function ContactMePage() {
   // Define the type of error message
@@ -30,6 +32,11 @@ function ContactMePage() {
     phoneNumber: errorMessages.phoneNumber,
     message: errorMessages.message,
   } as ErrorMessages);
+
+
+  const SERVICE_ID = import.meta.env.VITE_REACT_APP_EMAILJS_SERVICE_ID;
+  const TEMPLATE_ID = import.meta.env.VITE_REACT_APP_EMAILJS_TEMPLATE_ID;
+  const PUBLIC_KEY = import.meta.env.VITE_REACT_APP_EMAILJS_PUBLIC_KEY;
 
   // Validate form fields and print out errors if any
   const validateForm = () => {
@@ -84,6 +91,15 @@ function ContactMePage() {
       setContactPreference('');
       setErrors({});
     }
+    emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, event.target as HTMLFormElement, PUBLIC_KEY)
+    .then((result) => {
+      console.log(result.text);
+      alert('Message Sent Successfully')
+    }, (error) => {
+      console.log(error.text);
+      alert('Something went wrong!')
+    });
+  (event.target as HTMLFormElement).reset()
   };
 
   return (
