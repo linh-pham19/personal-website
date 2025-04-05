@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import '../App.css'
 import emailjs from 'emailjs-com';
+import Banner from '../components/Banner';
 
 function ContactMePage() {
   // Define the type of error message
@@ -32,6 +33,8 @@ function ContactMePage() {
     phoneNumber: errorMessages.phoneNumber,
     message: errorMessages.message,
   } as ErrorMessages);
+  const [banner,setBanner] = useState(false)
+  const [isBlurred, setIsBlurred] = useState(false);
 
 
   const SERVICE_ID = import.meta.env.VITE_REACT_APP_EMAILJS_SERVICE_ID;
@@ -39,7 +42,7 @@ function ContactMePage() {
   const PUBLIC_KEY = import.meta.env.VITE_REACT_APP_EMAILJS_PUBLIC_KEY;
 
   // Validate form fields and print out errors if any
-  const validateForm = () => {
+  const isFormValid = () => {
     const newErrors: { name?: string, email?: string, phoneNumber?: string, message?: string, contactPreference?: string } = {};
     if (!name.trim()) {
       newErrors.name = errorMessages.name;
@@ -81,31 +84,43 @@ function ContactMePage() {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
 
-    if (validateForm()) {
-      alert('Thank you for sending me a message!');
-      // Clear form fields after successful submission
-      setName('');
-      setEmail('');
-      setMessage('');
-      setPhoneNumber('');
-      setContactPreference('');
-      setErrors({});
+    if (!isFormValid()) {
+      return;
     }
     emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, event.target as HTMLFormElement, PUBLIC_KEY)
     .then((result) => {
-      console.log(result.text);
       alert('Message Sent Successfully')
     }, (error) => {
       console.log(error.text);
       alert('Something went wrong!')
     });
+
+   // Reset all form fields
+   setName('');
+   setEmail('');
+   setPhoneNumber('');
+   setMessage('');
+   setContactPreference('');
+   // Clear all error messages
+   setErrors(errorMessages);
+
+
   (event.target as HTMLFormElement).reset()
+  setBanner(true)
+  setIsBlurred(true);
   };
 
+  const handleBannerClose = () => {
+    setBanner(false);
+    setIsBlurred(false);
+  }
   return (
-    <div className="contact-page">
+    <>
+    {banner && <Banner onClose={handleBannerClose}/>}
+    <div className="contact-page" style={{filter: isBlurred ? 'blur(5px)' : 'none'}}>
       <h1 className="contact-title">Please leave me a message</h1>
       <form onSubmit={handleSubmit} className="contact-form">
+        {!isFormValid && <p style={{color: 'red'}}>Please see error(s) below</p>}
         <label className="form-label">
           Name:
           <input
@@ -133,13 +148,13 @@ function ContactMePage() {
         <label className="form-label">
           Phone number:
           <input
-            type="phoneNumber"
+            type="text"
             name="phoneNumber"
             className="form-input"
             value={phoneNumber}
             onChange={(e) => setPhoneNumber(e.target.value)}
           />
-          {errors.email && <p className="form-error" style={{ color: 'red' }}>{errors.phoneNumber}</p>}
+          {errors.phoneNumber && <p className="form-error" style={{ color: 'red' }}>{errors.phoneNumber}</p>}
         </label>
         <label className="form-label">
           Message:
@@ -192,6 +207,7 @@ function ContactMePage() {
         <button type="submit" className="form-button">Submit</button>
       </form>
     </div>
+  </>
   );
 }
 
