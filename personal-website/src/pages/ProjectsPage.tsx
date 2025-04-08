@@ -5,7 +5,7 @@ import '../App.css'
 function ProjectsPage() {
   return (
 <>
-
+<h1>COMING SOON!</h1>
 
 </>
      

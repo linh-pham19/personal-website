@@ -60,7 +60,8 @@ function ContactMePage() {
       case 'email':
         if (!value.trim()) {
           newErrors.email = errorMessages.email;
-        } else if (!/\S+@\S+\.\S+/.test(email)) {
+        } else if (!/\S+@\S+\.\S+/.test(email)) 
+          {
           newErrors.email = 'Email is invalid.';
         } else {
           delete newErrors.email;
