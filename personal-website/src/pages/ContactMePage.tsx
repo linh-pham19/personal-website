@@ -35,6 +35,8 @@ function ContactMePage() {
   } as ErrorMessages);
   const [banner, setBanner] = useState(false)
   const [isBlurred, setIsBlurred] = useState(false);
+  const [banner, setBanner] = useState(false)
+  const [isBlurred, setIsBlurred] = useState(false);
 
 
   const SERVICE_ID = import.meta.env.VITE_REACT_APP_EMAILJS_SERVICE_ID;
