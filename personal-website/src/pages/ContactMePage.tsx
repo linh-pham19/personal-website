@@ -155,7 +155,8 @@ function ContactMePage() {
     }
     emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, event.target as HTMLFormElement, PUBLIC_KEY)
       .then(() => {
-        alert('Message Sent Successfully')
+        setBanner(true)
+     
       }, (error) => {
         console.log(error.text);
         alert('Something went wrong!')
@@ -172,7 +173,6 @@ function ContactMePage() {
 
 
     (event.target as HTMLFormElement).reset()
-    setBanner(true)
     setIsBlurred(true);
   };
 
