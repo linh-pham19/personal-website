@@ -19,8 +19,13 @@ function ContactMePage() {
     email: 'Please enter your email',
     phoneNumber: 'Please enter your phone number',
     message: 'Please enter your message',
+    contactPreference: 'Please select a contact preference',
   };
-
+  const messageStyle = {
+    color: 'red',
+    fontSize: '1rem',
+    marginTop: '0.1rem',
+  }
   // Define state variable of each field
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -32,12 +37,10 @@ function ContactMePage() {
     email: errorMessages.email,
     phoneNumber: errorMessages.phoneNumber,
     message: errorMessages.message,
+    contactPreference: errorMessages.contactPreference,
   } as ErrorMessages);
   const [banner, setBanner] = useState(false)
   const [isBlurred, setIsBlurred] = useState(false);
-  const [banner, setBanner] = useState(false)
-  const [isBlurred, setIsBlurred] = useState(false);
-
 
   const SERVICE_ID = import.meta.env.VITE_REACT_APP_EMAILJS_SERVICE_ID;
   const TEMPLATE_ID = import.meta.env.VITE_REACT_APP_EMAILJS_TEMPLATE_ID;
@@ -62,7 +65,7 @@ function ContactMePage() {
       case 'email':
         if (!value.trim()) {
           newErrors.email = errorMessages.email;
-        } else if (!/\S+@\S+\.\S+/.test(email)) {
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value.trim())) {
           newErrors.email = 'Email is invalid.';
         } else {
           delete newErrors.email;
@@ -72,7 +75,7 @@ function ContactMePage() {
       case 'phoneNumber':
         if (!value.trim()) {
           newErrors.phoneNumber = errorMessages.phoneNumber;
-        } else if (phoneNumber && !/^\d{10}$/.test(phoneNumber)) {
+        } else if (value && !/^\d{10}$/.test(value.trim())) {
           newErrors.phoneNumber = 'Phone number must be 10 digits.';
         } else {
           delete newErrors.phoneNumber;
@@ -109,12 +112,12 @@ function ContactMePage() {
     }
     if (!email.trim()) {
       newErrors.email = errorMessages.email;
-    } else if (!/\S+@\S+\.\S+/.test(email)) {
+    } else if (!/\S+@\S+\.\S+/.test(email.trim())) {
       newErrors.email = 'Email is invalid.';
     }
     if (!phoneNumber.trim()) {
       newErrors.phoneNumber = errorMessages.phoneNumber;
-    } else if (phoneNumber && !/^\d{10}$/.test(phoneNumber)) {
+    } else if (phoneNumber && !/^\d{10}$/.test(phoneNumber.trim())) {
       newErrors.phoneNumber = 'Phone number must be 10 digits.';
     }
     if (!message.trim()) {
@@ -183,7 +186,7 @@ function ContactMePage() {
       <div className="contact-page" style={{ filter: isBlurred ? 'blur(5px)' : 'none' }}>
         <h1 className="contact-title">Please leave me a message</h1>
         <form onSubmit={handleSubmit} className="contact-form">
-          {!validateField && <p style={{ color: 'red' }}>Please see error(s) below</p>}
+          {!validateField && <p style={messageStyle}>Please see error(s) below</p>}
           <label className="form-label">
             Name:
             <input
@@ -196,9 +199,8 @@ function ContactMePage() {
                 validateField('name', e.target.value)
               }}
             />
-            {errors.name && <p className="form-error" style={{ color: 'red' }}>{errors.name}</p>}
+            {errors.name && <p style={messageStyle}>{errors.name}</p>}
           </label>
-          <br />
           <label className="form-label">
             Email:
             <input
@@ -211,9 +213,8 @@ function ContactMePage() {
                 validateField('email', e.target.value)
               }}
             />
-            {errors.email && <p className="form-error" style={{ color: 'red' }}>{errors.email}</p>}
+            {errors.email && <p style={messageStyle}>{errors.email}</p>}
           </label>
-          <br />
           <label className="form-label">
             Phone number:
             <input
@@ -226,7 +227,7 @@ function ContactMePage() {
                 validateField('phoneNumber', e.target.value)
               }}
             />
-            {errors.phoneNumber && <p className="form-error" style={{ color: 'red' }}>{errors.phoneNumber}</p>}
+            {errors.phoneNumber && <p style={messageStyle}>{errors.phoneNumber}</p>}
           </label>
           <label className="form-label">
             Message:
@@ -236,16 +237,15 @@ function ContactMePage() {
               value={message}
               onChange={(e) => {
                 setMessage(e.target.value)
-                validateField('message', e.target.value)
+                validateField('message', message)
               }}
             />
-            {errors.message && <p className="form-error" style={{ color: 'red' }}>{errors.message}</p>}
+            {errors.message && <p style={messageStyle}>{errors.message}</p>}
           </label>
           <br />
           <label className="form-label">
             Would you like to be contacted via phone or email?
           </label>
-          {errors.contactPreference && <p className="form-error" style={{ color: 'red' }}>{errors.contactPreference}</p>}
           <div className="label-wrapper">
             <label className="form-label">
               <input
@@ -266,7 +266,10 @@ function ContactMePage() {
                 name="contactPreference"
                 value="Email"
                 checked={contactPreference === 'Email'}
-                onChange={(e) => handleContactPreferenceChange(e.target.value)}
+                onChange={(e) => {
+                  handleContactPreferenceChange(e.target.value)
+                  validateField('contactPreference', e.target.value)
+                }}
               />
               Email
             </label>
@@ -276,11 +279,14 @@ function ContactMePage() {
                 name="contactPreference"
                 value="No I don't want to be contacted"
                 checked={contactPreference === 'No I don\'t want to be contacted'}
-                onChange={(e) => handleContactPreferenceChange(e.target.value)}
+                onChange={(e) => {
+                  handleContactPreferenceChange(e.target.value)
+                }}
               />
               I don't want to be contacted
             </label>
           </div>
+          {errors.contactPreference && <p style={messageStyle}>{errors.contactPreference}</p>}
           <br />
           <button type="submit" className="form-button">Submit</button>
         </form>
