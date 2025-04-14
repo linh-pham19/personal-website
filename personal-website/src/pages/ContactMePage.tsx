@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import '../App.css'
 import emailjs from 'emailjs-com';
 import Banner from '../components/Banner';
+import FormInput from '../components/FormInput';
+import FormRadioButton from '../components/FormRadioButton';
 
 function ContactMePage() {
   // Define the type of error message
@@ -156,7 +158,7 @@ function ContactMePage() {
     emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, event.target as HTMLFormElement, PUBLIC_KEY)
       .then(() => {
         setBanner(true)
-     
+
       }, (error) => {
         console.log(error.text);
         alert('Something went wrong!')
@@ -187,107 +189,67 @@ function ContactMePage() {
         <h1 className="contact-title">Please leave me a message</h1>
         <form onSubmit={handleSubmit} className="contact-form">
           {!validateField && <p style={messageStyle}>Please see error(s) below</p>}
-          <label className="form-label">
-            Name:
-            <input
-              type="text"
-              name="name"
-              className="form-input"
-              value={name}
-              onChange={(e) => {
-                setName(e.target.value);
-                validateField('name', e.target.value)
-              }}
-            />
-            {errors.name && <p style={messageStyle}>{errors.name}</p>}
-          </label>
-          <label className="form-label">
-            Email:
-            <input
-              type="email"
-              name="email"
-              className="form-input"
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value)
-                validateField('email', e.target.value)
-              }}
-            />
-            {errors.email && <p style={messageStyle}>{errors.email}</p>}
-          </label>
-          <label className="form-label">
-            Phone number:
-            <input
-              type="text"
-              name="phoneNumber"
-              className="form-input"
-              value={phoneNumber}
-              onChange={(e) => {
-                setPhoneNumber(e.target.value)
-                validateField('phoneNumber', e.target.value)
-              }}
-            />
-            {errors.phoneNumber && <p style={messageStyle}>{errors.phoneNumber}</p>}
-          </label>
-          <label className="form-label">
-            Message:
-            <textarea
-              name="message"
-              className="form-textarea"
-              value={message}
-              onChange={(e) => {
-                setMessage(e.target.value)
-                validateField('message', message)
-              }}
-            />
-            {errors.message && <p style={messageStyle}>{errors.message}</p>}
-          </label>
-          <br />
-          <label className="form-label">
-            Would you like to be contacted via phone or email?
-          </label>
-          <div className="label-wrapper">
-            <label className="form-label">
-              <input
-                type="radio"
-                name="contactPreference"
-                value="Phone"
-                checked={contactPreference === 'Phone'}
-                onChange={(e) => {
-                  handleContactPreferenceChange(e.target.value)
-                  validateField('contactPreference', e.target.value)
-                }}
-              />
-              Phone
-            </label>
-            <label className="form-label" style={{ marginLeft: '1rem' }}>
-              <input
-                type="radio"
-                name="contactPreference"
-                value="Email"
-                checked={contactPreference === 'Email'}
-                onChange={(e) => {
-                  handleContactPreferenceChange(e.target.value)
-                  validateField('contactPreference', e.target.value)
-                }}
-              />
-              Email
-            </label>
-            <label className="form-label" style={{ marginLeft: '1rem' }}>
-              <input
-                type="radio"
-                name="contactPreference"
-                value="No I don't want to be contacted"
-                checked={contactPreference === 'No I don\'t want to be contacted'}
-                onChange={(e) => {
-                  handleContactPreferenceChange(e.target.value)
-                }}
-              />
-              I don't want to be contacted
-            </label>
-          </div>
-          {errors.contactPreference && <p style={messageStyle}>{errors.contactPreference}</p>}
-          <br />
+          <FormInput
+            label="Name"
+            type="text"
+            name="name"
+            value={name}
+            onChange={(e) => {
+              setName(e.target.value);
+              validateField('name', e.target.value)
+            }}
+            error={errors.name}
+          />
+          <FormInput
+            label="Email"
+            type="email"
+            name="email"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              validateField('email', e.target.value)
+            }}
+            error={errors.email}
+          />
+          <FormInput
+            label="Phone Number"
+            type="text"
+            name="phoneNumber"
+            value={phoneNumber}
+            onChange={(e) => {
+              setPhoneNumber(e.target.value);
+              validateField('phoneNumber', e.target.value)
+            }}
+            error={errors.phoneNumber}
+          />
+          <FormInput
+            label="Message"
+            type="textarea"
+            name="message"
+            value={message}
+            onChange={(e) => {
+              setMessage(e.target.value);
+              validateField('message', e.target.value)
+            }}
+            error={errors.message}
+          />
+          <FormRadioButton 
+            label="Would you like to be contacted by phone or email?"
+            name="contactPreference"
+            options={[
+              { label: 'Email', value: 'Email' },
+              { label: 'Phone', value: 'Phone' },
+              { label: "No I don't want to be contacted", value: "No I don't want to be contacted" },
+            ]}
+            value={contactPreference}
+            onChange={(e) => {
+              handleContactPreferenceChange(e.target.value);
+              validateField('contactPreference', e.target.value)
+            }
+            }
+            error={errors.contactPreference}
+          />
+
           <button type="submit" className="form-button">Submit</button>
         </form>
       </div>
