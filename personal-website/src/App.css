@@ -25,20 +25,21 @@ main {
 
 h1 {
   font-size: 8rem; /* Large font size for the main title */
-  font-family: "Henny Penny", cursive;
+  font-family: 'Courier New', Courier, monospace;
   color: pink; /* White text color */
   text-align: center; /* Center the title */
   margin-top: 0rem; /* Add space above the title */
 }
 
 .navbar {
-  background: linear-gradient(#e66465, #9198e5); 
-  color: gray; 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333; /* Dark background */
   padding: 1rem; /* Add some padding */
   text-align: center; /* Center the text */
   font-size: 1.2rem; /* Slightly larger font size */
-  font-family: Arial, sans-serif; /* Clean font */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  font-family: 'Courier New', Courier, monospace; /* Clean font */
 }
 
 .navbar-list {
@@ -52,11 +53,14 @@ h1 {
 
 .navbar-item {
   margin: 0 1rem; /* Add spacing between items */
-  font-family: cursive; /* Clean font */
+  font-family: 'Courier New', Courier, monospace; /* Clean font */
   font-size: 30px;
   color: white; /* Ensure text is visible if the background is dark */
   cursor: pointer; /* Add a pointer cursor for better UX */
-  text-decoration: underline; /* Underline the text */
+}
+
+.navbar-item a:hover {
+  text-decoration: underline; /* Add underline on hover */
 }
 
 footer {
@@ -182,6 +186,7 @@ input[type="radio"]{
 }
 
 .text-box {
+  font-family:'Courier New', Courier, monospace;
   border: 5px solid #f76707;
   border-radius: 10px;
   padding: 10px;
@@ -230,4 +235,19 @@ input[type="radio"]{
   border-radius: 5px; /* Rounded corners */
   text-align: center; /* Center the text inside the banner */
   z-index: 1000; /* Ensure it appears above other elements */
+}
+
+.resume-link {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.resume-link:hover {
+  background-color: #0056b3;
 }
