@@ -17,7 +17,7 @@ function HomePage() {
       </h1>
       <div className="circular--portrait">
       <img
-          src="/src/assets/linhphamheadshot.png" alt="Photograph of Linh" />
+          src="/src/assets/LinhPhamPic.jpg" alt="Photograph of Linh" />
           
       </div>
       <div className='text-box'>
