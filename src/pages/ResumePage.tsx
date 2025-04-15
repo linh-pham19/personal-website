@@ -1,5 +1,3 @@
-import React from 'react';
-
 function ResumePage() {
     return (
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
