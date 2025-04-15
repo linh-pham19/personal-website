@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage';
 import ContactMePage from './pages/ContactMePage';
 import Navbar from './components/Navbar';
 import TravelPage from './pages/TravelPage';
+import ResumePage from './pages/ResumePage';
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <main>
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/resume" element={<ResumePage />} />
             <Route path="/projects" element={<ProjectsPage />} />
             <Route path="/travel" element={<TravelPage />} />
             <Route path="/contact" element={<ContactMePage />} />
