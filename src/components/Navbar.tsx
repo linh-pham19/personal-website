@@ -50,7 +50,7 @@ function Navbar() {
                 </a>
 
                 <a
-                    href="www.linkedin.com/in/linh-p"
+                    href="https://linkedin.com/in/linh-p"
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{
