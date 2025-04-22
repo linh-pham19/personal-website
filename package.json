@@ -9,9 +9,9 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "add-domain": "echo \"linhpham.dev\" > dist/CNAME",
+    "add-domain": "echo \"linhpham.dev\" > build/CNAME",
     "predeploy": "npm run build && npm run add-domain",
-    "deploy": "gh-pages -d dist" 
+    "deploy": "gh-pages -d build" 
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.1",
