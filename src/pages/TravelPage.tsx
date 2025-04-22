@@ -15,8 +15,8 @@ function TravelPage() {
       image: '/assets/lemur.jpg',
     },
     {
-      title: 'Antarctic Adventure',
-      description: 'Witness the beauty of penguins and icy landscapes in Antarctica.',
+      title: 'Penguins in South Africa',
+      description: 'Witness the beauty of penguins at Betty\'s Bay.',
       image: '/assets/penguins.jpg',
     },
     {
