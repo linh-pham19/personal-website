@@ -22,12 +22,6 @@ function App() {
             <Route path="/contact" element={<ContactMePage />} />
           </Routes>
         </main>
-
-
-
-        <footer>
-          <p>&copy; 2025 Linh Pham. All rights reserved.</p>
-        </footer>
       </BrowserRouter>
     </>
   )

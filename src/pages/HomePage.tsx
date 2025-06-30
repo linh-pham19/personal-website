@@ -21,7 +21,7 @@ function HomePage() {
           
       </div>
       <div className='text-box'>
-      <p>Hi, I’m Linh Pham, a full-stack software engineer with 3 years of experience building scalable web applications in enterprise environments. I work mainly with JavaScript, TypeScript, React, Redux, Svelte, Node.js, and Python—and I love turning complex problems into user-friendly solutions.
+      <p>Hi there! I'm Linh. I have 3 years of experience as a software engineer, specializing in full-stack development. My tech stacks are JavaScript/TypeScript, React, Node.js, and Python. I love figuring out how things work and solving problems with code.
       </p> 
       <br/>
       <p>I'm currently working on a web app called SafeTravels, which allows user to subscribe to receive latest updates via email or WhatsApp regarding safety in different places in the world!
